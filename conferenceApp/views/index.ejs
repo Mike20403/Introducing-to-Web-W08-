@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trang chủ</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .carousel-fade .carousel-item {
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+        .carousel-fade .carousel-item.active {
+            opacity: 1;
+        }
+        .carousel-fade .carousel-item-next.carousel-item-left,
+        .carousel-fade .carousel-item-prev.carousel-item-right,
+        .carousel-fade .carousel-item.active.carousel-item-left,
+        .carousel-fade .carousel-item.active.carousel-item-right {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Banner với hình ảnh -->
+        <div class="jumbotron text-center">
+            <!-- <img src="path_to_your_banner_image.jpg" class="img-fluid" alt="Banner Image"> -->
+            <h1>Chào mừng bạn đến với Hội nghị!</h1>
+            <p>Chúng tôi rất vui mừng được đón tiếp bạn</p>
+        </div>
+
+        <!-- Carousel -->
+        <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://www.shutterstock.com/image-photo/speaker-giving-talk-conference-hall-260nw-1117902230.jpg" class="d-block w-100" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://thumbs.dreamstime.com/b/audience-conference-hall-business-presentation-43707326.jpg" class="d-block w-100" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://cdn.create.vista.com/api/media/small/46302373/stock-photo-speaker-at-business-conference-and-presentation" class="d-block w-100" alt="Third slide">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <!-- Section: Giới thiệu về Hội nghị với hình ảnh -->
+        <section>
+            <!-- <img src="path_to_your_intro_image.jpg" class="img-fluid" alt="Intro Image"> -->
+            <h2>Giới thiệu về Hội nghị</h2>
+            <p>
+                Nội dung giới thiệu về hội nghị, thông tin cần chia sẻ với người dùng.
+            </p>
+        </section>
+
+        <!-- Section: Lịch trình với hình ảnh -->
+        <section>
+            <!-- <img src="path_to_your_schedule_image.jpg" class="img-fluid" alt="Schedule Image"> -->
+            <h2>Lịch trình</h2>
+            <p>
+                Thông tin về lịch trình, các sự kiện sắp diễn ra tại hội nghị.
+            </p>
+        </section>
+
+        <!-- Section: Đăng ký tham gia với hình ảnh -->
+        <section>
+            <!-- <img src="path_to_your_registration_image.jpg" class="img-fluid" alt="Registration Image"> -->
+            <h2>Đăng ký tham gia</h2>
+            <p>
+                Mô tả về quy trình đăng ký tham gia hội nghị và lợi ích của việc tham dự.
+            </p>
+            <a href="/registration" class="btn btn-primary">Đăng ký ngay</a>
+        </section>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

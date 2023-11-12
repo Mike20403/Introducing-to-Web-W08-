@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Đăng ký tham gia hội nghị</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Nếu bạn đã cài đặt bootstrap local, hãy điều chỉnh href tới file CSS của bạn -->
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="container">
+    <h1>Đăng ký tham gia hội nghị</h1>
+    <form id="registrationForm" action="/registration" method="POST">
+        <div class="mb-3">
+            <label for="fullname" class="form-label">Họ và tên</label>
+            <input type="text" name="fullname" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">Số điện thoại</label>
+            <input type="tel" name="phone" class="form-control" required>
+        </div>
+        <div class="form-check mb-3">
+            <input type="checkbox" name="confirmation" class="form-check-input" id="confirmation" value="yes">
+            <label class="form-check-label" for="confirmation">Xác nhận tham gia</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Xác nhận đăng ký</button>
+    </form>
+
+    <% if (message !== null) { %>
+    <div class="alert alert-success"><%= message %></div>
+    <% } 
+    %>
+
+
+    <a href="/feedback" class="btn btn-secondary mt-2">Xem kết quả đăng ký</a>
+    <a href="/" class="btn btn-light mt-2">Quay lại trang chủ</a>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    </body>
+    </html>

@@ -1,0 +1,159 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+	<div class="layout h-full">
+		<div class="navigation navbar navbar-expand-lg navbar-light bg-light p-3 d-flex flex-row justify-content-between"
+		style="height:10vh">
+		<a href="#" class="home text-decoration-none">Home</a>
+		<div class="search-section">
+			<input type="text" class="search-bar">
+			<button class="search-button">Search</button>
+		</div>
+	</div>
+	<div class="row mt-2" style="height: 80vh">
+		<div class="col-4 p-2">
+			<div class="bg-light side-section h-100">
+				<h2 class="title p-3">Side Title</h2>
+				<div class="sidebody p-3"> Side Content</div>
+			</div>
+		</div>
+		<div class="col-8 p-2">
+			<div class="main-content bg-light h-100">
+				<h2 class="main-title p-3">Main title</h2>
+				<div class="main-body p-3">
+					<div class="table">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">First name</th>
+									<th scope="col">Last name</th>
+									<th scope="col">Email</th>
+									<th scope="col">Avatar</th>
+								</tr>
+							</thead>
+							<tbody id="table-body">
+								
+							</tbody>
+						</table>
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
+
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row p-3">
+		<div class="footer text-center bg-light " style="height: 10vh; box-sizing:border-box">
+			<h3>Footer</h3>
+		</div>
+	</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Assuming you have a variable 'usersData' available from the server -->
+<script>
+$(document).ready(function () {
+        // Function to generate pagination
+	function generatePagination(totalPages, currentPage) {
+		const pagination = $('.pagination');
+		pagination.empty();
+
+            // Add "Previous" button
+		pagination.append(`<li class="page-item  ${currentPage === 1 ? 'disabled' : ''}"><a class="page-link" href="#" data-page="${currentPage - 1}">Previous</a></li>`);
+
+            // Add page numbers
+		for (let i = 1; i <= totalPages; i++) {
+			pagination.append(`<li class="page-item ${i === currentPage ? 'active' : ''}"><a class="page-link" href="#" data-page="${i}">${i}</a></li>`);
+		}
+
+            // Add "Next" button
+		pagination.append(`<li class="page-item"><a class="page-link ${currentPage === totalPages ? 'disabled' : ''}" href="#" data-page="${currentPage + 1}">Next</a></li>`);
+	}
+
+        // Initial data (replace this with actual data from the server)
+	const usersData = <%- JSON.stringify(usersData) %>;
+	console.log(<%- JSON.stringify(usersData) %>)
+
+        // Function to update the table with data and pagination
+	function updateTable(data) {
+            // Clear existing table rows and pagination links
+		$('#table-body').empty();
+		console.log(data)
+            // Add new table rows based on the data
+		for (let i = 0; i < data.data.length; i++) {
+			$('#table-body').append(`
+				<tr data-user-id="${data.data[i].id}" style="cursor: pointer;">
+				<th scope="row">${data.data[i].id}</th>
+				<td>${data.data[i].first_name}</td>
+				<td>${data.data[i].last_name}</td>
+				<td>${data.data[i].email}</td>
+				<td><img src="${data.data[i].avatar}" alt="Avatar" style="width: 50px; height: 50px;"></td>
+				</tr>
+				`);
+		}
+
+            // Generate pagination based on total pages and current page
+		generatePagination(data.total_pages, data.page);
+	}
+
+        // Update the table with initial data
+	updateTable(usersData);
+
+        // Handle pagination clicks
+	$('.pagination').on('click', 'a.page-link', function (e) {
+		e.preventDefault();
+		const page = parseInt($(this).data('page'));
+
+
+		getPaginatedData(page)
+		.then((data) => {
+                    // Update the table with the fetched data
+			updateTable(data);
+		})
+		.catch((error) => {
+			console.error('Error fetching paginated data:', error);
+		});
+	});
+	 // Handle row clicks
+	$('#table-body').on('click', 'tr', function () {
+		const userId = $(this).data('user-id');
+		
+		
+                // Redirect to the user-detail page with the corresponding user ID
+		window.location.href = `/user-detail/${userId}`;
+	});
+
+	function getPaginatedData(page) {
+		return new Promise((resolve) => {
+			$.ajax({
+                url: `https://reqres.in/api/users?page=${page}`, // Change the route based on your setup
+                type: 'GET',
+                success: function (data) {
+                	resolve(data);
+                },
+                error: function (error) {
+                	console.error('Error fetching paginated data:', error);
+                },
+            });
+		});
+	}
+});
+</script>
+</body>
+</html>
+
+

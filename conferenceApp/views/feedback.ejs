@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Phản hồi</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container">
+    <h1>Kết quả đăng ký</h1>
+    <div id="feedbackResult">
+        <ul class="list-group">
+            <% registrations.forEach(registration => { %>
+            <li class="list-group-item">
+                <p>Họ và tên: <%= registration.fullname %></p>
+                <p>Email: <%= registration.email %></p>
+                <p>Số điện thoại: <%= registration.phone %></p>
+                <p>Xác nhận tham gia: <%= registration.confirmation ? 'Có' : 'Không' %></p>
+            </li>
+            <% }); %>
+        </ul>
+    </div>
+
+    <a href="/registration" class="btn btn-secondary mt-2">Quay lại trang đăng ký</a>
+    <a href="/" class="btn btn-light mt-2">Quay lại trang chủ</a>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+</html>
